@@ -1,0 +1,33 @@
+ dumb = ListNode(0, head)
+        # 记录长度
+        cur = dumb
+        n = 0
+        while cur.next:
+            n += 1
+            cur = cur.next
+        # 每段的长度以及前面有额外长度的段数
+        a, b = divmod(n, k)
+        res = []
+        # 上一个节点与当前节点
+        pre, cur = dumb, head
+        # 记录当前是第几段
+        c = 0
+        while c < k:
+            # 加入当前节点
+            res.append(cur)
+            # 记录当前是第几个节点
+            d = 0
+            while d < a:
+                pre = pre.next
+                cur = cur.next
+                d += 1
+            # 前面有额外长度的段，再加一个节点
+            if c < b:
+                pre = pre.next
+                cur = cur.next
+            # 段数加1
+            c += 1
+            # 将前面与后面断开，重新规定哑结点作为前面的节点
+            pre.next = None
+            pre = ListNode(0, cur)
+        return res
