@@ -1,0 +1,12 @@
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        intervals.sort(key=lambda x:x[0] )
+        marge=[]
+        for interval in intervals:
+            if not marge or marge[-1][1]<interval[0]:
+                marge.append(interval)
+            else:
+                marge[-1][1]=max(marge[-1][1],interval[1])
+        return marge
+
+    //注意lambda的写法 注意排序
